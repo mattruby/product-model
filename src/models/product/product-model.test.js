@@ -24,12 +24,24 @@ const productData = {
         },
     ],
 };
-test('Product model - Happy path', () => {
+test('Product model - Correct line reported', () => {
     const product = Product.create(productData);
     expect(product.id).toBe('123');
     expect(product.description).toBe('Product description');
     const firstQuestion = product.questions[0];
     expect(firstQuestion.id).toBe('1');
+    const firstAnswer = firstQuestion.answers[0];
+    expect(firstAnswer.id).toBe('2');
+});
+
+test('Product model - Incorrect line reported', () => {
+    const product = Product.create(productData);
+    expect(product.id).toBe('123');
+
+    expect(product.description).toBe('Product description');
+    const firstQuestion = product.questions[0];
+    expect(firstQuestion.id).toBe('1');
+
     const firstAnswer = firstQuestion.answers[0];
     expect(firstAnswer.id).toBe('2');
 });
